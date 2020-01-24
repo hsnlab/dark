@@ -1,0 +1,7 @@
+flask
+python-novaclient
+python-neutronclient
+python-glanceclient
+keystoneauth1
+python-heatclient
+networking-sfc

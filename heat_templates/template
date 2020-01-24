@@ -1,0 +1,61 @@
+heat_template_version:
+
+resources:
+  network:
+    type: OS::Neutron::Net
+    properties:
+      name:
+  # network_end
+
+  subnet:
+    type: OS::Neutron::Subnet
+    properties:
+      name:
+      network:
+      cidr:
+    depends_on:
+  # subnet_end
+
+  port:
+    type: OS::Neutron::Port
+    properties:
+      name:
+      network:
+  # port_end
+
+  instance:
+    type: OS::Nova::Server
+    properties:
+      name:
+      image:
+      flavor:
+      availability_zone:
+      networks:
+        - port:
+    depends_on:
+  # instance_end
+
+  port_pair:
+    type: OS::Neutron::PortPair
+    properties:
+      name:
+      ingress:
+      egress:
+    depends_on:
+  # port_pair_end
+
+  port_pair_group:
+    type: OS::Neutron::PortPairGroup
+    properties:
+      name:
+      port_pairs:
+    depends_on:
+  # port_pair_group_end
+
+  port_chain:
+    type: OS::Neutron::PortChain
+    properties:
+      name:
+      port_pair_groups:
+    depends_on:
+  # port_chain_end
